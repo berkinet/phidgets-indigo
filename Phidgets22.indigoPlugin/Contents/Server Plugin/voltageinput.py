@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 import traceback
-import string
 import indigo
 
 from Phidget22.Devices.VoltageInput import VoltageInput
-from Phidget22.PhidgetException import PhidgetException
 from Phidget22.VoltageSensorType import VoltageSensorType
 
 from phidget import PhidgetBase
 
-import phidget_util
 import sensortypes
 
 
@@ -37,28 +34,24 @@ class VoltageInputPhidget(PhidgetBase):
         self.phidget.setOnVoltageChangeHandler(self.onVoltageChangeHandler)
         self.phidget.setOnSensorChangeHandler(self.onSensorChangeHandler)
 
-    def onAttachHandler(self, ph):
-        super(VoltageInputPhidget, self).onAttachHandler(ph)
-        try:
-            newDataInterval = self.checkValueRange("dataInterval", value=self.dataInterval, minValue=self.phidget.getMinDataInterval(),  maxValue=self.phidget.getMaxDataInterval())
-            if newDataInterval is None:
-                self.phidget.setDataInterval(PhidgetBase.PHIDGET_DEFAULT_DATA_INTERVAL)
-            else:
-                self.phidget.setDataInterval(newDataInterval)
+    def configureAttachedPhidget(self, ph):
+        newDataInterval = self.checkValueRange("dataInterval", value=self.dataInterval, minValue=self.phidget.getMinDataInterval(),  maxValue=self.phidget.getMaxDataInterval())
+        if newDataInterval is None:
+            self.phidget.setDataInterval(PhidgetBase.PHIDGET_DEFAULT_DATA_INTERVAL)
+        else:
+            self.phidget.setDataInterval(newDataInterval)
 
-            self.phidget.setSensorType(self.sensorType)
+        self.phidget.setSensorType(self.sensorType)
 
-            newVoltageChangeTrigger = self.checkValueRange(
-                fieldname="voltageChangeTrigger", value=self.voltageChangeTrigger,
-                minValue=self.phidget.getMinVoltageChangeTrigger(), 
-                maxValue=self.phidget.getMaxVoltageChangeTrigger())
-            if newVoltageChangeTrigger is not None:
-                self.phidget.setVoltageChangeTrigger(newVoltageChangeTrigger)
+        newVoltageChangeTrigger = self.checkValueRange(
+            fieldname="voltageChangeTrigger", value=self.voltageChangeTrigger,
+                minValue=self.phidget.getMinVoltageChangeTrigger(),
+            maxValue=self.phidget.getMaxVoltageChangeTrigger())
+        if newVoltageChangeTrigger is not None:
+            self.phidget.setVoltageChangeTrigger(newVoltageChangeTrigger)
 
-            self.phidget.setSensorValueChangeTrigger(self.sensorValueChangeTrigger)
-            
-        except Exception as e:
-            self.logger.error(traceback.format_exc())
+        self.phidget.setSensorValueChangeTrigger(self.sensorValueChangeTrigger)
+
 
     def onVoltageChangeHandler(self, ph, voltage):
         self.indigoDevice.updateStateOnServer("voltage_in", value=voltage, decimalPlaces=self.decimalPlaces)
@@ -88,7 +81,7 @@ class VoltageInputPhidget(PhidgetBase):
         elif self.customState and self.customFormula:
             newStatesList.append(self.indigo_plugin.getDeviceStateDictForNumberType(self.customState, self.customState, self.customState))
         return newStatesList
-    
+
     def getDeviceDisplayStateId(self):
         if self.sensorType != VoltageSensorType.SENSOR_TYPE_VOLTAGE:
             return self.sensorStateName

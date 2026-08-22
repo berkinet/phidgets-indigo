@@ -6,7 +6,6 @@
 # Unfortunately, `PhidgetAnalogSensor_getVoltageSensorUnit` and `PhidgetAnalogSensor_getVoltageRatioSensorUnit` are NOT accessible from python.
 
 from Phidget22.Unit import Unit
-from Phidget22.UnitInfo import UnitInfo
 from Phidget22.VoltageRatioSensorType import VoltageRatioSensorType
 from Phidget22.VoltageSensorType import VoltageSensorType
 
@@ -92,4 +91,3 @@ def getVoltageRatioSensorUnit(sensorType):
         if sensorType in value:
             return key
     return Unit.PHIDUNIT_NONE
-

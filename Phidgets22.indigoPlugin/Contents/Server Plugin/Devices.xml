@@ -3,6 +3,28 @@
 	<Device id="voltageInput" type="custom">
 		<Name>Voltage Input</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/><Field id="serialNumber" type="textfield" readonly="true"><Label>Serial number:</Label></Field><Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled"><Label>Connected to a VINT hub?</Label></Field>
+			<Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Is this a VINT device?</Label></Field>
+			<Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Hub port:</Label></Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
+			<Field id="discoverySeparator" type="separator"/>
 			<Field id="voltageSensorType" type="menu" defaultValue="">
 				<Label>Voltage input type:</Label>
 				<List class="self" method="getPhidgetTypeMenu" filter="VoltageSensorType"/>
@@ -34,25 +56,6 @@
 				<Label>Suppress out of range errors for this device?</Label>
 			</Field>
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
-
-			<Field id="serialNumber" type="textfield">
-					<Label>Serial number:</Label>
-			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
- 		    <Field id="isVintHub" type="checkbox" defaultValue="False">
-				<Label>Connected to a VINT hub?</Label>
-			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Is this a VINT device?</Label>
-			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Hub port:</Label>
-			</Field>
 			<Field id="useCustomFormula" type="checkbox" defaultValue="False" visibleBindingId="voltageSensorType" visibleBindingValue="0" alwaysUseInDialogHeightCalc="true">
 				<Label>Use custom formula?</Label>
 			</Field>
@@ -68,6 +71,19 @@
 	<Device id="voltageRatioInput" type="custom">
 		<Name>Voltage Ratio Input</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/><Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/><Field id="serialNumber" type="textfield" readonly="true"><Label>Serial number:</Label></Field><Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled"><Label>Connected to a VINT hub?</Label></Field><Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Is this a VINT device?</Label></Field><Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Hub port:</Label></Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
+			<Field id="discoverySeparator" type="separator"/>
 			<Field id="voltageRatioSensorType" type="menu" defaultValue="">
 				<Label>Voltage input type:</Label>
 				<List class="self" method="getPhidgetTypeMenu" filter="VoltageRatioSensorType"/>
@@ -99,25 +115,6 @@
 				<Label>Suppress out of range errors for this device?</Label>
 			</Field>
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
-
-			<Field id="serialNumber" type="textfield">
-					<Label>Serial number:</Label>
-			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
- 		    <Field id="isVintHub" type="checkbox" defaultValue="False">
-				<Label>Connected to a VINT hub?</Label>
-			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Is this a VINT device?</Label>
-			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Hub port:</Label>
-			</Field>
 			<Field id="useCustomFormula" type="checkbox" defaultValue="False" visibleBindingId="voltageRatioSensorType" visibleBindingValue="0" alwaysUseInDialogHeightCalc="true">
 				<Label>Use custom formula?</Label>
 			</Field>
@@ -133,28 +130,34 @@
 	<Device id="digitalInput" type="custom">
 		<Name>Digital Input</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/><Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
 			<!-- <Field id="isAlarm" type="checkbox" defaultValue="False" tooltip="Device state Off will show as green, On as red">
 				<Label>Does this device signal an alarm condition</Label>
 			</Field> -->
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
-			<Field id="serialNumber" type="textfield">
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/>
+			<Field id="serialNumber" type="textfield" readonly="true">
 					<Label>Serial number:</Label>
 			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
-			<Field id="isVintHub" type="checkbox" defaultValue="False">
+			<Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled">
 				<Label>Connected to a VINT hub?</Label>
 			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
+			<Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
 				<Label>Is this a VINT device?</Label>
 			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
+			<Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
 				<Label>Hub port:</Label>
 			</Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
 
 			<Field id="customIcons" type="checkbox" defaultValue="False">
 				<Label>Define Device display on/off icons?</Label>
@@ -306,32 +309,51 @@
 	<Device id="digitalOutput" type="dimmer">
 		<Name>Digital Output</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/><Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/>
 
-			<Field id="serialNumber" type="textfield">
+			<Field id="serialNumber" type="textfield" readonly="true">
 					<Label>Serial number:</Label>
 			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
- 		    <Field id="isVintHub" type="checkbox" defaultValue="False">
+			<Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled">
 				<Label>Connected to a VINT hub?</Label>
 			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
+			<Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
 				<Label>Is this a VINT device?</Label>
 			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
+			<Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
 				<Label>Hub port:</Label>
 			</Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
 		</ConfigUI>
 	</Device>
 
 	<Device id="temperatureSensor" type="custom">
 		<Name>Temperature Sensor</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/><Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/><Field id="serialNumber" type="textfield" readonly="true"><Label>Serial number:</Label></Field><Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled"><Label>Connected to a VINT hub?</Label></Field><Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Is this a VINT device?</Label></Field><Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Hub port:</Label></Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
+			<Field id="discoverySeparator" type="separator"/>
 			<Field id="dataInterval" type="textfield" defaultValue="1000">
 					<Label>Data interval (ms):</Label>
 			</Field>
@@ -366,31 +388,25 @@
 			</Field>
 
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
-
-			<Field id="serialNumber" type="textfield">
-					<Label>Serial number:</Label>
-			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
-  		    <Field id="isVintHub" type="checkbox" defaultValue="False">
-				<Label>Connected to a VINT hub?</Label>
-			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Is this a VINT device?</Label>
-			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Hub port:</Label>
-			</Field>
 		</ConfigUI>
 	</Device>
 
 	<Device id="humiditySensor" type="custom">
 		<Name>Humidity Sensor</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/><Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/><Field id="serialNumber" type="textfield" readonly="true"><Label>Serial number:</Label></Field><Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled"><Label>Connected to a VINT hub?</Label></Field><Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Is this a VINT device?</Label></Field><Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Hub port:</Label></Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
+			<Field id="discoverySeparator" type="separator"/>
 			<Field id="dataInterval" type="textfield" defaultValue="1000">
 					<Label>Data interval (ms):</Label>
 			</Field>
@@ -412,31 +428,25 @@
 			</Field>
 
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
-
-			<Field id="serialNumber" type="textfield">
-					<Label>Serial number:</Label>
-			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
-  		    <Field id="isVintHub" type="checkbox" defaultValue="False">
-				<Label>Connected to a VINT hub?</Label>
-			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Is this a VINT device?</Label>
-			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Hub port:</Label>
-			</Field>
 		</ConfigUI>
 	</Device>
 
 	<Device id="frequencyCounter" type="custom">
 		<Name>Frequency Counter</Name>
 		<ConfigUI>
+			<Field id="configurationMigrated" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="migrationNotice" type="label" visibleBindingId="configurationMigrated" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>This device was automatically updated from the Phidgets 22 v0.2.0 legacy configuration. Review the discovered selection, then click Save to complete the update.</Label></Field>
+			<Field id="serverSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="deviceSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="vintSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="portSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="targetSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelParentSelected" type="checkbox" defaultValue="false" hidden="true"/><Field id="channelChoiceRequired" type="checkbox" defaultValue="false" hidden="true"/><Field id="derivedFieldsEnabled" type="checkbox" defaultValue="false" hidden="true"/>
+			<Field id="exampleLabel" type="label"><Label>Select a server, Phidget, and channel.</Label></Field>
+			<Field id="discoveredServer" type="menu" defaultValue="manual"><Label>Discovered server:</Label><List class="self" method="getDiscoveredServerMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredDevice" type="menu" defaultValue="selectServer" enabledBindingId="serverSelected"><Label>Phidget:</Label><List class="self" method="getDiscoveredDeviceMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredPort" type="menu" defaultValue="selectDevice" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="deviceSelected"><Label>VINT port:</Label><List class="self" method="getDiscoveredPortMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredTarget" type="menu" defaultValue="selectPort" visibleBindingId="vintSelected" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true" enabledBindingId="portSelected"><Label>Port device/function:</Label><List class="self" method="getDiscoveredTargetMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="discoveredChannel" type="menu" defaultValue="" enabledBindingId="channelParentSelected" visibleBindingId="channelChoiceRequired" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Discovered channel:</Label><List class="self" method="getDiscoveredChannelMenu" dynamicReload="true"/><CallbackMethod>menuChanged</CallbackMethod></Field>
+			<Field id="serverName" type="textfield" hidden="true"/><Field id="serialNumber" type="textfield" readonly="true"><Label>Serial number:</Label></Field><Field id="channel" type="textfield" hidden="true"/>
+			<Field id="isVintHub" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled"><Label>Connected to a VINT hub?</Label></Field><Field id="isVintDevice" type="checkbox" defaultValue="False" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Is this a VINT device?</Label></Field><Field id="hubPort" type="textfield" enabledBindingId="derivedFieldsEnabled" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"><Label>Hub port:</Label></Field>
+			<Field id="observedConnection" type="textfield"><Label>Phidgets path:</Label></Field>
+			<Field id="discoverySeparator" type="separator"/>
 			<Field id="filterType" type="menu" defaultValue="">
 				<Label>Filter type:</Label>
 				<List class="self" method="getPhidgetTypeMenu" filter="FilterType"/>
@@ -470,25 +480,6 @@
 					<Label>Frequency cuoff (Hz):</Label>
 			</Field>
 
-			<Field id="exampleLabel" type="label">
-				<Label>The following sections will (eventually) be populated automatically.</Label>
-			</Field>
-
-			<Field id="serialNumber" type="textfield">
-					<Label>Serial number:</Label>
-			</Field>
-			<Field id="channel" type="textfield">
-					<Label>Channel:</Label>
-			</Field>
- 		    <Field id="isVintHub" type="checkbox" defaultValue="False">
-				<Label>Connected to a VINT hub?</Label>
-			</Field>
-			<Field id="isVintDevice" type="checkbox" defaultValue="False" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Is this a VINT device?</Label>
-			</Field>
-			<Field id="hubPort" type="textfield" visibleBindingId="isVintHub" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
-				<Label>Hub port:</Label>
-			</Field>
 
 			<Field id="isDAQ1400" type="checkbox" defaultValue="False" visibleBindingId="isVintDevice" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
 				<Label>Is this a DAQ1400 VINT Phidget?</Label>

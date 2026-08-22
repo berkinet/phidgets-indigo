@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
-import traceback
-
 import indigo
 
-from Phidget22.PhidgetException import PhidgetException
 from Phidget22.Devices.FrequencyCounter import FrequencyCounter
-from Phidget22.ErrorCode import ErrorCode
 
 from phidget import PhidgetBase
-
-import phidget_util
 
 class FrequencyCounterPhidget(PhidgetBase):
     def __init__(self, filterType, dataInterval, displayStateName, frequencyCutoff, isDAQ1400, inputType, powerSupply, *args, **kwargs):
@@ -28,35 +22,31 @@ class FrequencyCounterPhidget(PhidgetBase):
         self.phidget.setOnDetachHandler(self.onDetachHandler)
         self.phidget.setOnFrequencyChangeHandler(self.onFrequencyChangeHandler)
 
-    def onAttachHandler(self, ph):
-        super(FrequencyCounterPhidget, self).onAttachHandler(ph)
-        try:
-            newDataInterval = self.checkValueRange("dataInterval", value=self.dataInterval, minValue=self.phidget.getMinDataInterval(),  maxValue=self.phidget.getMaxDataInterval())
-            if newDataInterval is None:
-                self.phidget.setDataInterval(PhidgetBase.PHIDGET_DEFAULT_DATA_INTERVAL)
-            else:
-                self.phidget.setDataInterval(newDataInterval)
+    def configureAttachedPhidget(self, ph):
+        newDataInterval = self.checkValueRange("dataInterval", value=self.dataInterval, minValue=self.phidget.getMinDataInterval(),  maxValue=self.phidget.getMaxDataInterval())
+        if newDataInterval is None:
+            self.phidget.setDataInterval(PhidgetBase.PHIDGET_DEFAULT_DATA_INTERVAL)
+        else:
+            self.phidget.setDataInterval(newDataInterval)
 
-            # setFrequencyCutoff() - The frequency at which zero hertz is assumed.
-            newFrequencyCutoff = self.checkValueRange('frequencyCutoff', value=self.frequencyCutoff, minValue=0, maxValue=100, zero_ok=True)
-            if newFrequencyCutoff is None:
-                self.phidget.setFrequencyCutoff(1.0)
-            else:
-                self.phidget.setFrequencyCutoff(float(newFrequencyCutoff))
+        # setFrequencyCutoff() - The frequency at which zero hertz is assumed.
+        newFrequencyCutoff = self.checkValueRange('frequencyCutoff', value=self.frequencyCutoff, minValue=0, maxValue=100, zero_ok=True)
+        if newFrequencyCutoff is None:
+            self.phidget.setFrequencyCutoff(1.0)
+        else:
+            self.phidget.setFrequencyCutoff(float(newFrequencyCutoff))
 
-            if not self.phidget.getEnabled():
-                # Enable if not already enabled. DAQ1400 is always enabled.
-                self.phidget.setEnabled(True)
-   
-            if self.isDAQ1400:
-                self.phidget.setInputMode(self.inputType)
-                self.phidget.setPowerSupply(self.powerSupply)
-            else:
-                # FilterType can not be set for DAQ1400.
-                self.phidget.setFilterType(self.filterType)
+        if not self.phidget.getEnabled():
+            # Enable if not already enabled. DAQ1400 is always enabled.
+            self.phidget.setEnabled(True)
 
-        except Exception as e:
-            self.logger.error(traceback.format_exc())
+        if self.isDAQ1400:
+            self.phidget.setInputMode(self.inputType)
+            self.phidget.setPowerSupply(self.powerSupply)
+        else:
+            # FilterType can not be set for DAQ1400.
+            self.phidget.setFilterType(self.filterType)
+
 
     def onFrequencyChangeHandler(self, ph, frequency):
         self.indigoDevice.updateStateOnServer("frequency", value=frequency,  decimalPlaces=self.decimalPlaces)

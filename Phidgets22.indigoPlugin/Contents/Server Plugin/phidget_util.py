@@ -2,7 +2,6 @@
 # Random utility functions relating to the Indigo phidget plugin.
 #
 
-from Phidget22.Devices.Log import Log
 from Phidget22.DeviceClass import DeviceClass
 
 
@@ -21,4 +20,3 @@ def logPhidgetEvent(ph, logger, eventType="UNKNOWN"):
             str(serialNumber) + " -> Channel:  " + str(channel))
 
     return
-    

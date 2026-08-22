@@ -9,7 +9,19 @@ for [Indigo](https://www.indigodomo.com/).
 ## Requirements
 
 - [Indigo](https://www.indigodomo.com) 2022.1 or newer
-- [Phidgets 2.2 Driver](https://www.phidgets.com/docs/OS_-_macOS) 1.10.20220413 or newer
+- The official [Phidget22 Python package](https://www.phidgets.com/docs/Language_-_Python), installed for Indigo's Python 3.13:
+
+  ```bash
+  "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13" \
+    -m pip install --upgrade phidget22
+  ```
+
+The plugin intentionally does not bundle the native Phidget22 library. Installing
+the official package with Indigo's interpreter avoids macOS Gatekeeper quarantine
+on routine plugin updates and keeps the Python bindings and native library matched.
+
+See the brief [Getting started guide](docs/GETTING_STARTED.md) for plugin setup,
+device creation, and printing a Phidgets network map.
 
 ## Status
 
@@ -27,3 +39,9 @@ Only network phidgets are supported. To use local attached phidgets, enable the 
 ## Phidget Addressing
 
 See the [Phidget Documentation](https://www.phidgets.com/docs/Addressing_Phidgets]) for details on how to address a Phidget.
+
+## Development documentation
+
+- [Baseline architecture and assessment](docs/BASELINE_ASSESSMENT.md)
+- [Read-only discovery inventory](docs/DISCOVERY_INVENTORY.md)
+- [Preparatory cleanup audit](docs/CLEANUP_AUDIT.md)

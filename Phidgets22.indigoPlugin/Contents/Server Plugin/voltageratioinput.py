@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
-import string
 import traceback
 
 import indigo
 
 from Phidget22.Devices.VoltageRatioInput import VoltageRatioInput
-from Phidget22.PhidgetException import PhidgetException
 from Phidget22.VoltageRatioSensorType import VoltageRatioSensorType
 
 from phidget import PhidgetBase
 
-import phidget_util
 import sensortypes
 
 class VoltageRatioInputPhidget(PhidgetBase):
@@ -33,28 +30,24 @@ class VoltageRatioInputPhidget(PhidgetBase):
         self.phidget.setOnVoltageRatioChangeHandler(self.setOnVoltageRatioChangeHandler)
         self.phidget.setOnSensorChangeHandler(self.onSensorChangeHandler)
 
-    def onAttachHandler(self, ph):
-        super(VoltageRatioInputPhidget, self).onAttachHandler(ph)
-        try:
-            newDataInterval = self.checkValueRange("dataInterval", value=self.dataInterval, minValue=self.phidget.getMinDataInterval(),  maxValue=self.phidget.getMaxDataInterval())
-            if newDataInterval is None:
-                self.phidget.setDataInterval(PhidgetBase.PHIDGET_DEFAULT_DATA_INTERVAL)
-            else:
-                self.phidget.setDataInterval(newDataInterval)
+    def configureAttachedPhidget(self, ph):
+        newDataInterval = self.checkValueRange("dataInterval", value=self.dataInterval, minValue=self.phidget.getMinDataInterval(),  maxValue=self.phidget.getMaxDataInterval())
+        if newDataInterval is None:
+            self.phidget.setDataInterval(PhidgetBase.PHIDGET_DEFAULT_DATA_INTERVAL)
+        else:
+            self.phidget.setDataInterval(newDataInterval)
 
-            self.phidget.setSensorType(self.sensorType)
+        self.phidget.setSensorType(self.sensorType)
 
-            newVoltageRatioChangeTrigger = self.checkValueRange(
-                fieldname="voltageRatioChangeTrigger", value=self.voltageRatioChangeTrigger,
-                minValue=self.phidget.getMinVoltageRatioChangeTrigger(), 
-                maxValue=self.phidget.getMaxVoltageRatioChangeTrigger())
-            if newVoltageRatioChangeTrigger is not None:
-                self.phidget.setVoltageRatioChangeTrigger(newVoltageRatioChangeTrigger)
+        newVoltageRatioChangeTrigger = self.checkValueRange(
+            fieldname="voltageRatioChangeTrigger", value=self.voltageRatioChangeTrigger,
+                minValue=self.phidget.getMinVoltageRatioChangeTrigger(),
+            maxValue=self.phidget.getMaxVoltageRatioChangeTrigger())
+        if newVoltageRatioChangeTrigger is not None:
+            self.phidget.setVoltageRatioChangeTrigger(newVoltageRatioChangeTrigger)
 
-            self.phidget.setSensorValueChangeTrigger(self.sensorValueChangeTrigger)
+        self.phidget.setSensorValueChangeTrigger(self.sensorValueChangeTrigger)
 
-        except Exception as e:
-            self.logger.error(traceback.format_exc())
 
     def setOnVoltageRatioChangeHandler(self, ph, voltageRatio):
         self.indigoDevice.updateStateOnServer("voltageRatio", value=voltageRatio, decimalPlaces=self.decimalPlaces)
@@ -74,7 +67,7 @@ class VoltageRatioInputPhidget(PhidgetBase):
 
         if self.sensorStateName == "percent":
             self.indigoDevice.updateStateImageOnServer(indigo.kStateImageSel.HumiditySensorOn)
-        
+
         if self.sensorStateName == "lux":
             self.indigoDevice.updateStateImageOnServer(indigo.kStateImageSel.EnergyMeterOn)
 
@@ -89,7 +82,7 @@ class VoltageRatioInputPhidget(PhidgetBase):
         elif self.customState and self.customFormula:
             newStatesList.append(self.indigo_plugin.getDeviceStateDictForNumberType(self.customState, self.customState, self.customState))
         return newStatesList
-    
+
     def getDeviceDisplayStateId(self):
         if self.sensorType != VoltageRatioSensorType.SENSOR_TYPE_VOLTAGERATIO:
             return self.sensorStateName

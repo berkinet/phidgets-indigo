@@ -3,13 +3,10 @@ import traceback
 
 import indigo
 
-from Phidget22.PhidgetException import PhidgetException
 from Phidget22.Devices.DigitalOutput import DigitalOutput
 from Phidget22.ErrorCode import ErrorCode
 
 from phidget import PhidgetBase
-
-import phidget_util
 
 class DigitalOutputPhidget(PhidgetBase):
     def __init__(self, *args, **kwargs):
@@ -63,4 +60,3 @@ class DigitalOutputPhidget(PhidgetBase):
         if res != ErrorCode.EPHIDGET_OK:
             self.logger.error("Async failure: %i : %s" % (res, details))
         self.updateIndigoStatus()
-

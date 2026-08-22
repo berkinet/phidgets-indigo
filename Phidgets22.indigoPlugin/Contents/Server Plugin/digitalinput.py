@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
-import traceback
 import datetime
 
 import indigo
 
 from Phidget22.Devices.DigitalInput import DigitalInput
-from Phidget22.PhidgetException import PhidgetException
-from Phidget22.PowerSupply import PowerSupply
-
 from phidget import PhidgetBase
-
-import phidget_util
 
 class DigitalInputPhidget(PhidgetBase):
     def __init__(self, isAlarm, onStateIcon, offStateIcon, *args, **kwargs):
@@ -62,5 +56,4 @@ class DigitalInputPhidget(PhidgetBase):
 
     def getDeviceDisplayStateId(self):
         return "onState"
-
 
